@@ -101,6 +101,20 @@ require('packer').startup(function(use)
     
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
+  use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+    require("toggleterm").setup()
+  end}
+  -- Lua
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
 
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
