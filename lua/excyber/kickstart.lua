@@ -1,10 +1,7 @@
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  is_bootstrap = true
-  vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
-  vim.cmd [[packadd packer.nvim]]
-end
+  is_bootstrap = true vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path } vim.cmd ('packadd packer.nvim') end
 
 require('packer').startup(function(use)
   -- Package manager
@@ -115,7 +112,23 @@ require('packer').startup(function(use)
       }
     end
   }
+  
+  -- Lua
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
 
+  -- CHECK LINK BELOW FOR MORE INTERESTING PLUGINS
+  -- https://astronvim.github.io/acknowledgements#plugins-used-in-astronvim
+  
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
     plugins(use)
